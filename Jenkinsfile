@@ -2,6 +2,7 @@ pipeline{
     agent any
     environment {
         VERSION = "${env.BUILD_ID}"
+        SCANNER_HOME = tool 'sonar-scanner'
     }
     tools {
         jdk 'Java17'
@@ -29,7 +30,7 @@ pipeline{
             steps{
                 script {
                     withSonarQubeEnv(credentialsId: 'sonar-pass') {
-                        sh 'mvn sonar:sonar'
+                        sh" ${SCANNER_HOME}/bin/sonar-scanner -Dsonar.projectKey=simple_webapp -Dsonar.sources=."
                     }
                 }
             }   
