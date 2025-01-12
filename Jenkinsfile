@@ -51,5 +51,19 @@ pipeline{
                 }
             }   
         }
+        stage("Deploy to Kubernetes") {
+            steps {
+                script {
+                    dir('dev/')
+                    {
+                        sh '''
+                            kubectl apply -f deployment.yaml
+                            kubectl set image deployment/springapp springapp=54.87.147.233:8083/springapp:${VERSION} -n default
+                            kubectl apply -f service.yaml
+                            '''
+                    }
+                }
+            }
+        }
     }
 }
