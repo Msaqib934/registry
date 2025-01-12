@@ -30,9 +30,9 @@ pipeline{
         stage("Quality Gate"){
             steps{
                 script {
-                    def Qualitygate = waitForQualityGate()
-                    if (QualityGate.status != 'OK') {
-                        error "abort pipeline: ${QualityGate.status}"
+                    def qualitygate = waitForQualityGate()
+                    if (qualitygate.status != 'OK') {
+                        error "abort pipeline: ${qualitygate.status}"
                     }
                 }
             }   
