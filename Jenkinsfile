@@ -40,7 +40,7 @@ pipeline{
         stage("Push Code to Nexus"){
             steps{
                 script{
-                    withCredentials([string(credentialsId: 'config', variable: 'conf')]) {
+                    withCredentials([string(credentialsId: 'nex', variable: 'nexus')]) {
                         sh '''
                             docker build -t 54.87.147.233:8083/springapp:${VERSION} .
                             docker login -u admin -p $nexus 54.87.147.233:8083
@@ -54,7 +54,7 @@ pipeline{
         stage("Deploy to Kubernetes") {
             steps {
                 script {
-                    withCredentials([string(credentialsId: 'nex', variable: 'nexus')]) {
+                    withCredentials([string(credentialsId: 'config', variable: 'conf')]) {
                         dir('dev/')
                             {
                                 sh '''
