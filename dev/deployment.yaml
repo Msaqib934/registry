@@ -14,6 +14,6 @@ spec:
     spec:
       containers:
       - name: myapp
-        image: 54.87.147.233:8083/springapp:1.0
+        image: 54.87.147.233:8083/springapp:${VERSION}
         ports:
         - containerPort: 8080
