@@ -54,13 +54,16 @@ pipeline{
         stage("Deploy to Kubernetes") {
             steps {
                 script {
-                    dir('dev/')
-                    {
-                        sh '''
-                            kubectl apply -f deployment.yaml
-                            kubectl set image deployment/myapp myapp=54.87.147.233:8083/springapp:${VERSION} -n default
-                            kubectl apply -f service.yaml
-                            '''
+                    withCredentials([string(credentialsId: 'nex', variable: 'nexus')]) {
+                        dir('dev/')
+                            {
+                                sh '''
+                                    docker login -u admin -p $nexus 54.87.147.233:8083
+                                    kubectl apply -f deployment.yaml
+                                    kubectl set image deployment/myapp myapp=54.87.147.233:8083/springapp:${VERSION} -n default
+                                    kubectl apply -f service.yaml
+                                '''
+                        }
                     }
                 }
             }
