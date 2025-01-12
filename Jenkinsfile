@@ -58,7 +58,7 @@ pipeline{
                     {
                         sh '''
                             kubectl apply -f deployment.yaml
-                            kubectl set image deployment/springapp springapp=54.87.147.233:8083/springapp:${VERSION} -n default
+                            kubectl set image deployment/myapp myapp=54.87.147.233:8083/springapp:${VERSION} -n default
                             kubectl apply -f service.yaml
                             '''
                     }
