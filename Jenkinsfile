@@ -54,14 +54,10 @@ pipeline{
         stage("Deploy to Kubernetes") {
             steps {
                 script {
-                        dir('dev/')
-                            {
                                 sh '''
                                     kubectl apply -f deployment.yaml --validate=false
                                     kubectl set image deployment/myapp myapp=54.87.147.233:8083/springapp:${VERSION} -n default
-                                    kubectl apply -f service.yaml --validate=false
                                 '''
-                    }
                 }
             }
         }
