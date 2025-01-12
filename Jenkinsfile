@@ -54,12 +54,10 @@ pipeline{
         stage("Deploy to Kubernetes") {
             steps {
                 script {
-                    withCredentials([file(credentialsId: 'conff', variable: 'kubeconfig')]) {
                                 sh '''
                                     kubectl get nodes
                                     kubectl get pod
                                 '''
-                     }
                 }
             }
         }
