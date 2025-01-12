@@ -56,8 +56,8 @@ pipeline{
                 script {
                     withCredentials([file(credentialsId: 'conff', variable: 'kubeconfig')]) {
                                 sh '''
-                                    kubectl apply --context $kubeconfig -f deployment.yaml --validate=false
-                                    kubectl set image deployment/myapp myapp=54.87.147.233:8083/springapp:${VERSION} -n default
+                                    kubectl get nodes
+                                    kubectl get pod
                                 '''
                      }
                 }
