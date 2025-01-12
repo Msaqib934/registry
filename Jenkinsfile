@@ -30,7 +30,7 @@ pipeline{
             steps{
                 script {
                     withSonarQubeEnv(credentialsId: 'sonar-pass') {
-                        sh" ${SCANNER_HOME}/bin/sonar-scanner -Dsonar.projectKey=simple_webapp -Dsonar.sources=."
+                        sh 'mvn sonar:sonar'
                     }
                 }
             }   
