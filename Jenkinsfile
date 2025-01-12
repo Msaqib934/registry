@@ -2,7 +2,6 @@ pipeline{
     agent any
     environment {
         VERSION = "${env.BUILD_ID}"
-        SCANNER_HOME = tool 'sonar-scanner'
     }
     tools {
         jdk 'Java17'
