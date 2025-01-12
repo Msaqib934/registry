@@ -32,7 +32,7 @@ pipeline{
                 script {
                     def Qualitygate = waitForQualityGate()
                     if (QualityGate.status != 'OK') {
-                        error "abort pipeline: ${qualityGate.status}"
+                        error "abort pipeline: ${QualityGate.status}"
                     }
                 }
             }   
