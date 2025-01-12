@@ -14,6 +14,6 @@ spec:
     spec:
       containers:
       - name: myapp
-        image: msaqib934/register-app-pipeline:1.0.0-21
+        image: 54.87.147.233:8083/springapp:1.0
         ports:
         - containerPort: 8080
