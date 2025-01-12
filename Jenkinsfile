@@ -10,23 +10,16 @@ pipeline{
     }
     stages{
         stage("Build Application"){
-            	steps {
+            steps {
                    sh "mvn clean package"
             }
-
        }
-
        	stage("Test Application"){
           	steps {
                   sh "mvn test"
            }
        }
         stage("Sonarqube"){
-            agent {
-                docker {
-                    image 'openjdk:17'
-                }
-            }
             steps{
                 script {
                     withSonarQubeEnv(credentialsId: 'sonar-pass') {
