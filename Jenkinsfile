@@ -40,7 +40,7 @@ pipeline{
         stage("Push Code to Nexus"){
             steps{
                 script{
-                    withCredentials([string(credentialsId: 'nex', variable: 'nexus')]) {
+                    withCredentials([string(credentialsId: 'config', variable: 'conf')]) {
                         sh '''
                             docker build -t 54.87.147.233:8083/springapp:${VERSION} .
                             docker login -u admin -p $nexus 54.87.147.233:8083
@@ -58,7 +58,6 @@ pipeline{
                         dir('dev/')
                             {
                                 sh '''
-                                    docker login -u admin -p $nexus 54.87.147.233:8083
                                     kubectl apply -f deployment.yaml --validate=false
                                     kubectl set image deployment/myapp myapp=54.87.147.233:8083/springapp:${VERSION} -n default
                                     kubectl apply -f service.yaml --validate=false
