@@ -54,10 +54,12 @@ pipeline{
         stage("Deploy to Kubernetes") {
             steps {
                 script {
+                    dir('dev/') {
                                 sh '''
-                                    kubectl get nodes
-                                    kubectl get pod
+                                    kubectl apply -f deployment.yaml
+                                    kubectl apply -f service.yaml
                                 '''
+                    }
                 }
             }
         }
