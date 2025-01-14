@@ -56,6 +56,7 @@ pipeline{
                 script {
                     dir('dev/') {
                                 sh '''
+                                    ctr image pull --hosts-dir "/etc/containerd/certs.d" 18.212.246.146:8083/springapp:${VERSION}
                                     kubectl apply -f deployment.yaml
                                     kubectl set image deployment/myapp myapp=18.212.246.146:8083/springapp:${VERSION} -n default
                                     kubectl apply -f service.yaml
