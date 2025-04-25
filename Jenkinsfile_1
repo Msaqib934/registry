@@ -43,7 +43,6 @@ pipeline{
                     withCredentials([string(credentialsId: 'nex', variable: 'nexus')]) {
                         sh '''
                             docker build -t msaqib934/devops-training:${VERSION} .
-                            docker login -u msaqib934 -p $nexus
                             docker push msaqib934/devops-training:${VERSION}
                             docker rmi msaqib934/devops-training:${VERSION}
                         '''
