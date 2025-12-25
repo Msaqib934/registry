@@ -22,10 +22,12 @@ pipeline{
             steps{
                 script {
                     withSonarQubeEnv(credentialsId: 'sonar') {
+                        dir('server') {
                         sh 'mvn clean verify sonar:sonar'
                     }
                 }
             }   
+        }
         }
         stage("Quality Gate"){
             steps{
